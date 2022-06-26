@@ -5,6 +5,7 @@ const gridSizeDisplayLocation =
 const gridSizeSliderLocation = document.getElementById(`gridSize`);
 
 let cellLocation;
+let gridHeight = 500;
 
 function getGridSize() {
   gridSize = gridSizeSliderLocation.value;
@@ -28,24 +29,35 @@ function displayGridSize() {
 }
 
 function createGrid(gridSize) {
-  let cell = document.createElement(`div`);
-  cell.setAttribute(`class`, `cell`);
-  gridLocation.appendChild(cell);
 
   //add css class that cointains same number of autos as getGridSIze
   let text = ``;
   for (let i = 0; i < gridSize; i++) {
-    text += `auto `;
+    // text += `auto `;
+    // text += `minmax(auto, 1fr) `;
+    text += `1fr `;
+    // text += `minmax(1fr, 1fr) `;
   }
   gridLocation.style.cssText = `grid-template-columns: ` + text;
 
+  // gridHeight = gridLocation.clientHeight;// does not work
+  // console.log(gridHeight);
+  gridHeightAdjusted = gridHeight / gridSize;
+  console.log(gridHeightAdjusted);
+  
   //actually create grid
   gridSize = Math.pow(gridSize, 2);
-  for (let i = 1; i < gridSize; i++) {
+  for (let i = 0; i < gridSize; i++) {
     let cell = document.createElement(`div`);
     cell.setAttribute(`class`, `cell`);
+
+    //add height of cell
+    cell.style.height = `${gridHeightAdjusted}px`;
+    cell.style.width = `${gridHeightAdjusted}px`;
     gridLocation.appendChild(cell);
   }
+
+  // console.log(gridHeight + " after");
 
   cellLocation = document.querySelectorAll(`.cell`);
 }
@@ -59,11 +71,13 @@ function removeGrid() {
 function paintCells(cells) {
   cells.forEach((cell) => {
     cell.addEventListener("mouseover", () => {
-      cell.style.cssText = `background-color: blue;`;
+      cell.style.cssText += `background-color: blue;`;
     });
+    // cell.addEventListener("mouseup", () => {
+    //   cell.style.cssText = `background-color: red;`;
+    // });
   });
 }
-
 
 function paint(cell) {
   cell.style.cssText = `background-color: red;`;
@@ -77,11 +91,19 @@ gridSizeSliderLocation.addEventListener(`input`, () => {
 });
 
 createGrid(16);
-// cellLocation = document.querySelectorAll(`.cell`);
+cellLocation = document.querySelectorAll(`.cell`);
 cellLocation.forEach((cell) => {
   cell.addEventListener("mouseover", () => {
-    cell.style.cssText = `background-color: red;`;
+    cell.style.cssText += `background-color: red;`;
   });
 });
 
-
+// //kinda works
+// cellLocation.forEach((cell) => {
+//   cell.addEventListener("mousedown", () => {
+//     paintCells(cellLocation);
+//   });
+//   cell.addEventListener("mousedup", () => {
+//       console.log("yo you up");
+//   });
+// });
