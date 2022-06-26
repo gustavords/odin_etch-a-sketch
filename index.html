@@ -10,22 +10,29 @@
   </head>
   <body>
     <h1 class="title">Etch-a-Sketch</h1>
-    <div class="content_container">
-      <div class="slider_container">
-        <p>
-          Grid Size: <span class="gridSizeDisplay">16</span> x
-          <span class="gridSizeDisplay">16</span>
-        </p>
-        <input
-          type="range"
-          min="16"
-          max="100"
-          value="16"
-          class="slider"
-          id="gridSize"
-        />
+    <div class="layout">
+      <div class="options">
+        <button id="rainbow">Toogle Rainbow Hover</button>
       </div>
-      <div class="grid_container"></div>
+      <div class="content_container">
+        <div class="slider_container">
+          <p>
+            Grid Size: <span class="gridSizeDisplay">16</span> x
+            <span class="gridSizeDisplay">16</span>
+          </p>
+          <input
+            type="range"
+            min="16"
+            max="60"
+            value="16"
+            class="slider"
+            id="gridSize"
+          />
+        </div>
+        <div class="grid_container"></div>
+      </div>
+  
+      
     </div>
     <!-- <p>Should pop up above here</p>
     <div class="test">

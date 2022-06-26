@@ -27,8 +27,8 @@
   gap: 0px 0px;
   justify-content: stretch;
   /* height: 732px; */
-  /* height: 600px;
-  width: 600px; */
+  height: 600px;
+  /* width: 600px;  */
   align-content: center;
   border: solid 1px rebeccapurple;
 }
@@ -43,6 +43,11 @@
   width: 5px; */
 }
 
+.layout{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 /* .test{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

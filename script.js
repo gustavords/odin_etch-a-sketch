@@ -29,7 +29,6 @@ function displayGridSize() {
 }
 
 function createGrid(gridSize) {
-
   //add css class that cointains same number of autos as getGridSIze
   let text = ``;
   for (let i = 0; i < gridSize; i++) {
@@ -44,7 +43,7 @@ function createGrid(gridSize) {
   // console.log(gridHeight);
   gridHeightAdjusted = gridHeight / gridSize;
   console.log(gridHeightAdjusted);
-  
+
   //actually create grid
   gridSize = Math.pow(gridSize, 2);
   for (let i = 0; i < gridSize; i++) {
@@ -70,18 +69,62 @@ function removeGrid() {
 
 function paintCells(cells) {
   cells.forEach((cell) => {
-    cell.addEventListener("mouseover", () => {
-      cell.style.cssText += `background-color: blue;`;
-    });
+    if (rainbowToken > 0) {
+      cell.addEventListener("mouseover", () => {
+        cell.style.cssText += `background-color: rgb(${Math.floor(
+          Math.random() * 255
+        )},${Math.floor(Math.random() * 255)},${Math.floor(
+          Math.random() * 255
+        )});`;
+      });
+    } else {
+      cell.addEventListener("mouseover", () => {
+        cell.style.cssText += `background-color: blue;`;
+        otherToken = 0;
+      });
+    }
+
     // cell.addEventListener("mouseup", () => {
     //   cell.style.cssText = `background-color: red;`;
     // });
+
+    //if button toggled, rainbow
   });
 }
 
 function paint(cell) {
   cell.style.cssText = `background-color: red;`;
 }
+
+const rainbowButton = document.getElementById(`rainbow`);
+let rainbowToken = 0;
+let otherToken = 0;
+
+rainbowButton.addEventListener(`click`, () => {
+  console.log("toggle");
+  rainbowButton.style.backgroundColor = `rgb(${Math.floor(
+    Math.random() * 255
+  )},${Math.floor(Math.random() * 255)},${Math.floor(
+    Math.random() * 255
+  )})`;
+  otherToken = 1;
+  console.log("this is otherTojen: " + otherToken);
+  if (rainbowToken > 0) {
+    rainbowButton.style.backgroundColor = `rgb(${Math.floor(
+      Math.random() * 255
+    )},${Math.floor(Math.random() * 255)},${Math.floor(
+      Math.random() * 255
+    )})`;
+
+    --rainbowToken;
+  } else {
+    ++rainbowToken;
+  }
+  console.log(rainbowToken);
+  removeGrid();
+  createGrid(getGridSize());
+  paintCells(cellLocation);
+});
 
 gridSizeSliderLocation.addEventListener(`input`, () => {
   removeGrid();
@@ -94,7 +137,7 @@ createGrid(16);
 cellLocation = document.querySelectorAll(`.cell`);
 cellLocation.forEach((cell) => {
   cell.addEventListener("mouseover", () => {
-    cell.style.cssText += `background-color: red;`;
+    cell.style.cssText += `background-color: blue;`;
   });
 });
 
