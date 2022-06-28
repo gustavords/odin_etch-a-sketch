@@ -22,8 +22,8 @@
 
 .grid_container {
   display: grid;
-  padding: 1em;
-  margin: 1em;
+  padding: 0px;
+  margin: 0px;
   gap: 0px 0px;
   justify-content: stretch;
   /* height: 732px; */
@@ -60,3 +60,21 @@
   border: solid 1px blue;
   background-color: red;
 } */
+
+.parent{
+  background-color: red;
+  border: solid 5px black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1em;
+  text-align: center;
+}
+
+
+.child{
+  background-color: yellow;
+  border: dotted 5px blue;
+  flex: auto;
+
+}

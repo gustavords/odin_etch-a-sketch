@@ -150,3 +150,13 @@ cellLocation.forEach((cell) => {
 //       console.log("yo you up");
 //   });
 // });
+
+const parent_element = document.querySelector(`.parent`);
+const child_element = document.querySelector(`.child`);
+
+parent_element.addEventListener(`mousedown`, () => {
+  parent_element.style.backgroundColor = `green`;
+});
+parent_element.addEventListener(`mouseup`, () => {
+  parent_element.style.backgroundColor = `red`;
+});
