@@ -13,17 +13,6 @@ function getGridSize() {
 }
 
 function displayGridSize() {
-  //i dont understand yet how this doesnt work
-  // gridSizeDisplayLocation.forEach((item) =>{{
-  //   item.innerText = `${getGridSize()}`;
-  // }});
-
-  ///this fucks with memory
-  // for(let i = 0; 1 < gridSizeDisplayLocation.length; i++){
-  //   gridSizeDisplayLocation[i].innerText = `${getGridSize()}`;
-  // }
-  // gridSizeDisplayLocation.innerText = `${getGridSize()}`;
-
   gridSizeDisplayLocation[0].innerText = `${getGridSize()}`;
   gridSizeDisplayLocation[1].innerText = `${getGridSize()}`;
 }
@@ -67,6 +56,7 @@ function removeGrid() {
   });
 }
 
+////////
 function paintCells(cells) {
   cells.forEach((cell) => {
     if (rainbowToken > 0) {
@@ -83,12 +73,6 @@ function paintCells(cells) {
         otherToken = 0;
       });
     }
-
-    // cell.addEventListener("mouseup", () => {
-    //   cell.style.cssText = `background-color: red;`;
-    // });
-
-    //if button toggled, rainbow
   });
 }
 
@@ -104,17 +88,13 @@ rainbowButton.addEventListener(`click`, () => {
   console.log("toggle");
   rainbowButton.style.backgroundColor = `rgb(${Math.floor(
     Math.random() * 255
-  )},${Math.floor(Math.random() * 255)},${Math.floor(
-    Math.random() * 255
-  )})`;
+  )},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
   otherToken = 1;
   console.log("this is otherTojen: " + otherToken);
   if (rainbowToken > 0) {
     rainbowButton.style.backgroundColor = `rgb(${Math.floor(
       Math.random() * 255
-    )},${Math.floor(Math.random() * 255)},${Math.floor(
-      Math.random() * 255
-    )})`;
+    )},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
 
     --rainbowToken;
   } else {
@@ -133,23 +113,61 @@ gridSizeSliderLocation.addEventListener(`input`, () => {
   paintCells(cellLocation);
 });
 
+//where the stuff actually runs
 createGrid(16);
 cellLocation = document.querySelectorAll(`.cell`);
+// cellLocation.forEach((cell) => {
+//   cell.addEventListener("mouseover", () => {
+//     cell.style.cssText += `background-color: blue;`;
+//   });
+// });
+
+// //kinda works
+let tokenTest = 0;
+// cellLocation.forEach((cell) => {
+//   cell.addEventListener("mousedown", () => {
+//     tokenTest = 1;
+//     console.log(`tokenTest:  ${tokenTest} on`);
+
+//     paintCells(cellLocation);
+//   });
+//   cell.addEventListener("mouseup", () => {
+//     tokenTest = 0;
+//     console.log(`tokenTest: ${tokenTest} off`);
+//     return false;
+//   });
+// });
+
+
+/////holy shit this works
+
+let isMouseDown = false;
+
+gridLocation.addEventListener(`mousedown`, () => {
+  isMouseDown = true;
+  console.log(`isMouseDown: ${isMouseDown}`);
+
+  cellLocation = document.querySelectorAll(`.cell`);
+  return isMouseDown;
+});
+
+gridLocation.addEventListener(`mouseup`, () => {
+  isMouseDown = false;
+  console.log(`isMouseDown: ${isMouseDown}`);
+  return isMouseDown;
+});
+
 cellLocation.forEach((cell) => {
-  cell.addEventListener("mouseover", () => {
-    cell.style.cssText += `background-color: blue;`;
+  cell.addEventListener(`mouseover`, () => {
+    if (isMouseDown) {
+      cell.style.backgroundColor = `green`;
+      console.log(`we did get here`);
+    }
   });
 });
 
-// //kinda works
-// cellLocation.forEach((cell) => {
-//   cell.addEventListener("mousedown", () => {
-//     paintCells(cellLocation);
-//   });
-//   cell.addEventListener("mousedup", () => {
-//       console.log("yo you up");
-//   });
-// });
+
+
 
 const parent_element = document.querySelector(`.parent`);
 const child_element = document.querySelector(`.child`);
@@ -159,4 +177,13 @@ parent_element.addEventListener(`mousedown`, () => {
 });
 parent_element.addEventListener(`mouseup`, () => {
   parent_element.style.backgroundColor = `red`;
+});
+
+child_element.addEventListener(`mousedown`, (e) => {
+  e.stopPropagation();
+  child_element.style.backgroundColor = `purple`;
+});
+child_element.addEventListener(`mouseup`, (e) => {
+  e.stopPropagation();
+  child_element.style.backgroundColor = `yellow`;
 });
