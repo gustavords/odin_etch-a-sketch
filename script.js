@@ -5,7 +5,9 @@ const gridSizeDisplayLocation =
 const gridSizeSliderLocation = document.getElementById(`gridSize`);
 
 let cellLocation;
-let gridHeight = 500;
+let gridHeight = 600;
+
+// console.log("grid height: " + gridLocation.clientHeight);
 
 function getGridSize() {
   gridSize = gridSizeSliderLocation.value;
@@ -28,8 +30,8 @@ function createGrid(gridSize) {
   }
   gridLocation.style.cssText = `grid-template-columns: ` + text;
 
-  // gridHeight = gridLocation.clientHeight;// does not work
-  // console.log(gridHeight);
+  // console.log("grid height: " + gridLocation.clientHeight);// does not work
+
   gridHeightAdjusted = gridHeight / gridSize;
   console.log(gridHeightAdjusted);
 
