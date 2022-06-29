@@ -1,13 +1,11 @@
 //16x16 grid of square divs
-const gridLocation = document.querySelector(`.grid_container`);
+const grid = document.querySelector(`.grid_container`);
 const gridSizeDisplayLocation =
   document.getElementsByClassName(`gridSizeDisplay`);
 const gridSizeSliderLocation = document.getElementById(`gridSize`);
 
 let cellLocation;
 let gridHeight = 600;
-
-// console.log("grid height: " + gridLocation.clientHeight);
 
 function getGridSize() {
   gridSize = gridSizeSliderLocation.value;
@@ -19,47 +17,41 @@ function displayGridSize() {
   gridSizeDisplayLocation[1].innerText = `${getGridSize()}`;
 }
 
-function createGrid(gridSize) {
-  //add css class that cointains same number of autos as getGridSIze
+function createGrid(gridSize = 16) {
+  //adds css for grid
   let text = ``;
   for (let i = 0; i < gridSize; i++) {
-    // text += `auto `;
-    // text += `minmax(auto, 1fr) `;
     text += `1fr `;
-    // text += `minmax(1fr, 1fr) `;
   }
-  gridLocation.style.cssText = `grid-template-columns: ` + text;
+  grid.style.cssText = `grid-template-columns: ` + text;
 
-  // console.log("grid height: " + gridLocation.clientHeight);// does not work
-
+  //TODO: Figure out why .clientHeight work in console but not from script( returns 0)
+  // console.log("grid height: " + grid.clientHeight);// does not work
   gridHeightAdjusted = gridHeight / gridSize;
-  console.log(gridHeightAdjusted);
 
-  //actually create grid
+  //creates grid
   gridSize = Math.pow(gridSize, 2);
   for (let i = 0; i < gridSize; i++) {
     let cell = document.createElement(`div`);
     cell.setAttribute(`class`, `cell`);
 
-    //add height of cell
+    //adds height& width of cell
     cell.style.height = `${gridHeightAdjusted}px`;
     cell.style.width = `${gridHeightAdjusted}px`;
-    gridLocation.appendChild(cell);
+    grid.appendChild(cell);
   }
-
-  // console.log(gridHeight + " after");
-
+  //sets cellLocation
   cellLocation = document.querySelectorAll(`.cell`);
 }
 
 function removeGrid() {
   cellLocation.forEach((cell) => {
-    gridLocation.removeChild(cell);
+    grid.removeChild(cell);
   });
 }
 
 ////////
-function paintCells(cells) {
+function paintCells(cells, paintColour) {
   cells.forEach((cell) => {
     if (rainbowToken > 0) {
       cell.addEventListener("mouseover", () => {
@@ -71,15 +63,11 @@ function paintCells(cells) {
       });
     } else {
       cell.addEventListener("mouseover", () => {
-        cell.style.cssText += `background-color: blue;`;
+        cell.style.cssText += `background-color: ${paintColour} ;`;
         otherToken = 0;
       });
     }
   });
-}
-
-function paint(cell) {
-  cell.style.cssText = `background-color: red;`;
 }
 
 const rainbowButton = document.getElementById(`rainbow`);
@@ -108,6 +96,7 @@ rainbowButton.addEventListener(`click`, () => {
   paintCells(cellLocation);
 });
 
+//slider event for resizing grid
 gridSizeSliderLocation.addEventListener(`input`, () => {
   removeGrid();
   displayGridSize();
@@ -116,7 +105,9 @@ gridSizeSliderLocation.addEventListener(`input`, () => {
 });
 
 //where the stuff actually runs
-createGrid(16);
+//--------------------------////-------------------------///
+
+createGrid();
 cellLocation = document.querySelectorAll(`.cell`);
 // cellLocation.forEach((cell) => {
 //   cell.addEventListener("mouseover", () => {
@@ -124,68 +115,56 @@ cellLocation = document.querySelectorAll(`.cell`);
 //   });
 // });
 
-// //kinda works
-let tokenTest = 0;
-// cellLocation.forEach((cell) => {
-//   cell.addEventListener("mousedown", () => {
-//     tokenTest = 1;
-//     console.log(`tokenTest:  ${tokenTest} on`);
-
-//     paintCells(cellLocation);
-//   });
-//   cell.addEventListener("mouseup", () => {
-//     tokenTest = 0;
-//     console.log(`tokenTest: ${tokenTest} off`);
-//     return false;
-//   });
-// });
-
+//--------------------------////-------------------------///
 
 /////holy shit this works
+//--------------------------////-------------------------///
+//--------------------------////-------------------------///
+//--------------------------////-------------------------///
 
 let isMouseDown = false;
 
-gridLocation.addEventListener(`mousedown`, () => {
+grid.addEventListener(`mousedown`, () => {
   isMouseDown = true;
   console.log(`isMouseDown: ${isMouseDown}`);
-
-  cellLocation = document.querySelectorAll(`.cell`);
+  //reset div grid position
+  // cellLocation = document.querySelectorAll(`.cell`);
   return isMouseDown;
 });
 
-gridLocation.addEventListener(`mouseup`, () => {
+grid.addEventListener(`mouseup`, () => {
   isMouseDown = false;
   console.log(`isMouseDown: ${isMouseDown}`);
   return isMouseDown;
 });
 
 cellLocation.forEach((cell) => {
+  //Issue:mouse doesnt actually "paint" the cell clicked on
+  //TODO:figure out how to add an event for the initial click
   cell.addEventListener(`mouseover`, () => {
     if (isMouseDown) {
-      cell.style.backgroundColor = `green`;
+      cell.style.backgroundColor = `${paintColour}`;
       console.log(`we did get here`);
     }
   });
 });
+//--------------------------////-------------------------///
+//--------------------------////-------------------------///
+//--------------------------////-------------------------///
+let colourSlc = document.getElementById(`colour_selector`);
 
+// colourSlc.addEventListener(`click`, () => {
+//   console.log("colour clicked");
+// });
 
-
-
-const parent_element = document.querySelector(`.parent`);
-const child_element = document.querySelector(`.child`);
-
-parent_element.addEventListener(`mousedown`, () => {
-  parent_element.style.backgroundColor = `green`;
-});
-parent_element.addEventListener(`mouseup`, () => {
-  parent_element.style.backgroundColor = `red`;
-});
-
-child_element.addEventListener(`mousedown`, (e) => {
-  e.stopPropagation();
-  child_element.style.backgroundColor = `purple`;
-});
-child_element.addEventListener(`mouseup`, (e) => {
-  e.stopPropagation();
-  child_element.style.backgroundColor = `yellow`;
-});
+//TODO: load function so we know what paint color is what
+let paintColour = ``;
+colourSlc.addEventListener(
+  "change",
+  () => {
+    colourSlc.select();
+    paintColour = colourSlc.value;
+    console.log(`colour value:${paintColour} typeof:${typeof paintColour} `);
+  },
+  false
+);

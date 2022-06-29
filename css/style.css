@@ -15,8 +15,6 @@
   text-align: center;
 }
 
-
-
 .grid_container {
   display: grid;
   padding: 0px;
@@ -48,11 +46,10 @@
 }
 
 /*this is where the new layout css is*/
-/*-----------------------------------------*//*-----------------------------------------*/
-/*-----------------------------------------*//*-----------------------------------------*/
-/*-----------------------------------------*//*-----------------------------------------*/
-/*-----------------------------------------*//*-----------------------------------------*/
-
+/*-----------------------------------------*/ /*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/
 
 .container {
   background-color: yellow;
@@ -64,7 +61,7 @@
   /*dont know if this should be here*/
   /* flex: 1;   */
 }
-.btn_options{
+.btn_options {
   background-color: orange;
   border: dashed 5px black;
   display: flex;
@@ -72,24 +69,63 @@
   gap: 1em;
   /*dont know if this should be here*/
   /* flex: 1; */
-  padding: 10em 0em;
+  padding: 10em 1em;
 }
 
-#colour_btn, #erase_btn, #rainbow_switch{
+#colour_btn,
+#erase_btn,
+#rainbow_switch {
   /* border: none; */
   padding: 0em 5em;
   /* margin: 6em 0em; */
-  flex: 1;  
+  flex: 1;
   /* height: 1em; */
-} 
+}
 
-.canvas_container{
+/* --colour selector button--  */
+.inputs {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 1em; */
+  align-items: center;
+  background-color: red;
+  padding: 1em;
+}
+.inputs:hover {
+  box-sizing: border-box;
+  border: solid 1px purple;
+  box-shadow: 10px;
+}
+.colour_label {
+  background-color: beige;
+  padding: 1em;
+}
+#colour_selector {
+  padding: 0;
+  height: 100%;
+  /* width: 100%; */
+  /* width: 100%; */
+  /* justify-items: center; */
+  flex: 2;
+  /* border: double 5px black; */
+  border: none
+}
+
+/*
+TODO: do it through tjs since it has to happen with one or the other at the same time
+*/
+/* .colour_label:hover,
+#colour_selector:hover {
+  border: solid 1px black;
+} */
+
+.canvas_container {
   background-color: purple;
   border: dashed 5px orangered;
 }
 
-.slider_section{
- /* //i wanna switch to this */
+.slider_section {
+  /* //i wanna switch to this */
 }
 
 .slider_container {
@@ -99,7 +135,7 @@
   border: dashed 5px goldenrod;
 }
 
-/*-----------------------------------------*//*-----------------------------------------*/
-/*-----------------------------------------*//*-----------------------------------------*/
-/*-----------------------------------------*//*-----------------------------------------*/
-/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/
+/*-----------------------------------------*/ /*-----------------------------------------*/

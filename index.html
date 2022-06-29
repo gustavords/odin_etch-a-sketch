@@ -14,7 +14,11 @@
     <!-- new layout starts here -->
     <div class="container">
       <div class="btn_options">
-        <button id="colour_btn">Color<span></span></button>
+        <div class="inputs">
+          <label class="colour_label" for="colour_selector">Colour:</label>
+          <input type="color" id="colour_selector" name="colour_selector" />
+        </div>
+        <!-- <button id="colour_btn" type="color">Color<span></span></button> -->
         <input type="checkbox" id="rainbow_switch" /><label
           for="switch"
           class="toogle"
@@ -42,6 +46,5 @@
       </div>
     </div>
     <!-- ends here -->
-    
   </body>
 </html>
