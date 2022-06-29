@@ -6,8 +6,8 @@
   padding: 1em;
   margin: 1em;
 }
-.title{
-  margin:0;
+.title {
+  margin: 0;
 }
 
 .slider_container,
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.slider_container{
+.slider_container {
   padding: 1em;
   margin: 1em;
 }
@@ -43,8 +43,8 @@
   width: 5px; */
 }
 
-.layout{
-  display:flex;
+.layout {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -61,7 +61,8 @@
   background-color: red;
 } */
 
-.parent{
+/* test stuff */
+.parent {
   background-color: red;
   border: solid 5px black;
   display: flex;
@@ -71,10 +72,66 @@
   text-align: center;
 }
 
-
-.child{
+.child {
   background-color: yellow;
   border: dotted 5px blue;
   flex: auto;
-
 }
+
+/*this is where the new layout css is*/
+/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*//*-----------------------------------------*/
+
+
+.container {
+  background-color: yellow;
+  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  padding: 1em;
+  /*dont know if this should be here*/
+  /* flex: 1;   */
+}
+.btn_options{
+  background-color: red;
+  border: dashed 5px black;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  /*dont know if this should be here*/
+  /* flex: 1; */
+  /* align-items: center; */
+}
+
+#colour_btn, #erase_btn, #rainbow_switch{
+  /* border: none; */
+  padding: 0em 5em;
+  /* margin: 6em 0em; */
+  
+  flex: 1;  
+  /* height: 1em; */
+} 
+
+.canvas_container{
+  background-color: purple;
+  border: dashed 5px orangered;
+}
+
+.slider_section{
+  background-color: green;
+  border: dashed 5px goldenrod;
+}
+
+.canvas_grid{
+  background-color: blue;
+  border: dotted 5px white;
+  padding: 20em;
+}
+
+/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*//*-----------------------------------------*/
+/*-----------------------------------------*//*-----------------------------------------*/
