@@ -1,42 +1,44 @@
-.content_container {
+@font-face {
+  font-family: neonGenesisEvangelion;
+  src: url(../fonts/FOT-Matisse\ Pro\ EB.otf);
+}
+
+body {
+  /* background-color: #a060a8; */
+  /* background-color:#f182; */
+  background-color: black;
+}
+.title_section {
   display: flex;
   justify-content: center;
-  flex-direction: column-reverse;
-  align-items: center;
-  padding: 1em;
-  margin: 1em;
+  color: white;
+  gap: 5px;
+  padding-right: 20em;
+  font-family: neonGenesisEvangelion;
+  height: 10em;
 }
 .title {
   margin: 0;
+  text-align: left;
+  line-height: 150%;
+}
+h1 > span {
+  font-size: 150%;
 }
 
-.slider_container,
-.title {
-  text-align: center;
-}
-
-.grid_container {
-  display: grid;
-  padding: 0px;
-  margin: 0px;
-  gap: 0px 0px;
-  /* justify-content: stretch; */
-  /* height: 732px; */
-  max-height: 600px;
-  /* width: 600px;  */
-  align-content: center;
-  border: solid 1px rebeccapurple;
-}
-
-.cell {
-  flex: auto;
-  box-sizing: border-box;
-  border: solid 1px brown;
-  background-color: pink;
+.title_section > p {
+  /* color: #dc7d68; */
+  color:orangered;
+  /* color: #adf182; */
+  font-size: 100px;
+  margin: 0;
   padding: 0;
-  margin: 0;
-  /* height: 5px;
-  width: 5px; */
+  word-spacing: -20px;
+  transform: scale(1, 1.72);
+        -webkit-transform: scale(1, 1.72);
+        -moz-transform: scale(1, 1.72);
+        -o-transform: scale(1, 1.72);
+        transform-origin: 0% 82%;
 }
 
 .layout {
@@ -45,70 +47,74 @@
   align-items: center;
 }
 
-/*this is where the new layout css is*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
-
 .container {
-  background-color: yellow;
-  border: solid 1px black;
+  background-color: #916cad;
+  border: solid 1px white;
   display: flex;
   justify-content: center;
   gap: 2em;
   padding: 1em;
-  /*dont know if this should be here*/
-  /* flex: 1;   */
 }
+
 .btn_options {
-  background-color: orange;
-  border: dashed 5px black;
+  background-color: #523874;
+  border: double 5px black;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  /*dont know if this should be here*/
-  /* flex: 1; */
   padding: 10em 1em;
+  color: #2c1649;
 }
 
-#colour_btn,
-#erase_btn,
-#rainbow_switch {
-  /* border: none; */
-  padding: 0em 5em;
-  /* margin: 6em 0em; */
-  flex: 1;
-  /* height: 1em; */
+#erase_btn {
+  padding: 2em;
 }
 
-/* --colour selector button--  */
 .inputs {
   display: flex;
   justify-content: space-between;
-  /* gap: 1em; */
   align-items: center;
-  background-color: red;
+  background-color: #916cad;
+  border: solid 3px #5e9d1f;
   padding: 1em;
 }
 .inputs:hover {
   box-sizing: border-box;
-  border: solid 1px purple;
+  border: solid 2px #adf182;
   box-shadow: 10px;
+  color: #adf182;
 }
+
 .colour_label {
-  background-color: beige;
+  background-color: #f182;
   padding: 1em;
 }
+
 #colour_selector {
   padding: 0;
   height: 100%;
-  /* width: 100%; */
-  /* width: 100%; */
-  /* justify-items: center; */
   flex: 2;
-  /* border: double 5px black; */
-  border: none
+  border: none;
+}
+
+.rainbow_label,
+.erase_label {
+  padding: 1em;
+}
+
+#rainbow_switch,
+#erase_switch {
+  padding: 0;
+  flex: 2;
+}
+input[type="checkbox"] {
+  transform: scale(2);
+  /* padding: 100px; */
+}
+
+#rainbow_switch:checked + .rainbow_label,
+#erase_switch:checked + .erase_label {
+  color: #adf182;
 }
 
 /*
@@ -120,22 +126,45 @@ TODO: do it through tjs since it has to happen with one or the other at the same
 } */
 
 .canvas_container {
-  background-color: purple;
-  border: dashed 5px orangered;
-}
-
-.slider_section {
-  /* //i wanna switch to this */
+  background-color: #523874;
+  border: double 5px rebeccapurple;
+  padding: 1em;
 }
 
 .slider_container {
-  padding: 1em;
-  margin: 1em;
-  background-color: green;
-  border: dashed 5px goldenrod;
+  padding: 0.2em;
+  margin: 0em 0em 1em 0em;
+  background-color: #916cad;
+  border: solid 3px #5e9d1f;
+  text-align: center;
+  /* color: #523874; */
+  color: #2c1649;
 }
 
-/*-----------------------------------------*/ /*-----------------------------------------*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
-/*-----------------------------------------*/ /*-----------------------------------------*/
+.slider {
+  width: 80%;
+  /* background:linear-gradient(to right, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%); */
+}
+.gridSizeDisplay {
+  color: #8ae234;
+}
+
+
+.grid_container {
+  display: grid;
+  padding: 0px;
+  margin: 0px;
+  gap: 0px 0px;
+  max-height: 600px;
+  align-content: center;
+  border: solid 3px #5e9d1f;
+}
+
+.cell {
+  flex: auto;
+  box-sizing: border-box;
+  border: solid 1px black;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
