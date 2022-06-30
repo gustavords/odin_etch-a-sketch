@@ -9,30 +9,57 @@
     <title>Odin Etch-a-Sketch</title>
   </head>
   <body>
-    <h1 class="title">Etch-a-Sketch</h1>
+    <div class="title_section">
+      <h1 class="title">Etch<br />-a-<br /><span>Sketch</span></h1>
+      <p>E.A.S O1</p>
+    </div>
 
     <!-- new layout starts here -->
     <div class="container">
       <div class="btn_options">
         <div class="inputs">
-          <label class="colour_label" for="colour_selector">Colour:</label>
-          <input type="color" id="colour_selector" name="colour_selector" />
+          <label class="colour_label" for="colour_selector"
+            ><strong>Colour:</strong></label
+          >
+          <input
+            type="color"
+            id="colour_selector"
+            name="colour_selector"
+            autocomplete="off"
+          />
         </div>
-        <!-- <button id="colour_btn" type="color">Color<span></span></button> -->
-        <input type="checkbox" id="rainbow_switch" /><label
-          for="switch"
-          class="toogle"
-        ></label>
-        <!-- <button id="rainbow_btn">Rainbow</button> -->
-        <button id="rainbow">Toogle Rainbow Hover</button>
-        <button id="erase_btn">Erase</button>
+
+        <div class="inputs">
+          <input
+            type="checkbox"
+            id="rainbow_switch"
+            value="rainbow"
+            autocomplete="off"
+          />
+          <label for="rainbow_switch" class="rainbow_label"
+            ><strong>Rainbow Mode</strong></label
+          >
+        </div>
+
+        <div class="inputs">
+          <input
+            type="checkbox"
+            id="erase_switch"
+            value="erase"
+            autocomplete="off"
+          />
+          <label for="erase_switch" class="erase_label"
+            ><strong>Eraser Mode *</strong></label
+          >
+        </div>
+        <button id="erase_btn">Erase All</button>
       </div>
       <div class="canvas_container">
         <div class="slider_container">
-          <p>
+          <h3>
             Grid Size: <span class="gridSizeDisplay">16</span> x
             <span class="gridSizeDisplay">16</span>
-          </p>
+          </h3>
           <input
             type="range"
             min="16"
@@ -40,6 +67,7 @@
             value="16"
             class="slider"
             id="gridSize"
+            autocomplete="off"
           />
         </div>
         <div class="grid_container"></div>
