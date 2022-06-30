@@ -4,8 +4,15 @@ const gridSizeDisplayLocation =
   document.getElementsByClassName(`gridSizeDisplay`);
 const gridSizeSliderLocation = document.getElementById(`gridSize`);
 
-let cellLocation;
+let cellLocation = document.querySelectorAll(`.cell`);
 let gridHeight = 600;
+let colourSlc = document.getElementById(`colour_selector`);
+let rainbowTgl = document.getElementById(`rainbow_switch`);
+let eraseTgl = document.getElementById(`erase_switch`);
+let isRainbowChecked = false;
+let isEraseChecked = false;
+let isMouseDown = false;
+let paintColour = colourSlc.value;
 
 function getGridSize() {
   gridSize = gridSizeSliderLocation.value;
@@ -50,79 +57,45 @@ function removeGrid() {
   });
 }
 
-////////
-function paintCells(cells, paintColour) {
-  cells.forEach((cell) => {
-    if (rainbowToken > 0) {
-      cell.addEventListener("mouseover", () => {
-        cell.style.cssText += `background-color: rgb(${Math.floor(
-          Math.random() * 255
-        )},${Math.floor(Math.random() * 255)},${Math.floor(
-          Math.random() * 255
-        )});`;
-      });
-    } else {
-      cell.addEventListener("mouseover", () => {
-        cell.style.cssText += `background-color: ${paintColour} ;`;
-        otherToken = 0;
-      });
-    }
+function paint() {
+  cellLocation.forEach((cell) => {
+    //Issue:mouse doesnt actually "paint" the cell clicked on
+    //TODO:figure out how to add an event for the initial click
+    cell.addEventListener(`mouseover`, () => {
+      if (isMouseDown) {
+        if (isRainbowChecked) {
+          //255,255,255 is white, so dont go that far
+          cell.style.cssText += `background-color: rgb(${Math.floor(
+            Math.random() * 254
+          )},${Math.floor(Math.random() * 254)},${Math.floor(
+            Math.random() * 254
+          )});`;
+        } else if (isEraseChecked) {
+          cell.style.backgroundColor = `white`;
+        } else {
+          cell.style.backgroundColor = `${paintColour}`;
+        }
+      }
+    });
   });
 }
 
-const rainbowButton = document.getElementById(`rainbow`);
-let rainbowToken = 0;
-let otherToken = 0;
+function erase() {
+  cellLocation.forEach((cell) => {
+    cell.style.backgroundColor = `white`;
+  });
+}
 
-rainbowButton.addEventListener(`click`, () => {
-  console.log("toggle");
-  rainbowButton.style.backgroundColor = `rgb(${Math.floor(
-    Math.random() * 255
-  )},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
-  otherToken = 1;
-  console.log("this is otherTojen: " + otherToken);
-  if (rainbowToken > 0) {
-    rainbowButton.style.backgroundColor = `rgb(${Math.floor(
-      Math.random() * 255
-    )},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
-
-    --rainbowToken;
-  } else {
-    ++rainbowToken;
-  }
-  console.log(rainbowToken);
-  removeGrid();
-  createGrid(getGridSize());
-  paintCells(cellLocation);
-});
+//where the stuff actually runs
+//--------------------------////-------------------------///
 
 //slider event for resizing grid
 gridSizeSliderLocation.addEventListener(`input`, () => {
   removeGrid();
   displayGridSize();
   createGrid(getGridSize());
-  paintCells(cellLocation);
+  paint();
 });
-
-//where the stuff actually runs
-//--------------------------////-------------------------///
-
-createGrid();
-cellLocation = document.querySelectorAll(`.cell`);
-// cellLocation.forEach((cell) => {
-//   cell.addEventListener("mouseover", () => {
-//     cell.style.cssText += `background-color: blue;`;
-//   });
-// });
-
-//--------------------------////-------------------------///
-
-/////holy shit this works
-//--------------------------////-------------------------///
-//--------------------------////-------------------------///
-//--------------------------////-------------------------///
-
-let isMouseDown = false;
 
 grid.addEventListener(`mousedown`, () => {
   isMouseDown = true;
@@ -138,33 +111,41 @@ grid.addEventListener(`mouseup`, () => {
   return isMouseDown;
 });
 
-cellLocation.forEach((cell) => {
-  //Issue:mouse doesnt actually "paint" the cell clicked on
-  //TODO:figure out how to add an event for the initial click
-  cell.addEventListener(`mouseover`, () => {
-    if (isMouseDown) {
-      cell.style.backgroundColor = `${paintColour}`;
-      console.log(`we did get here`);
-    }
-  });
-});
-//--------------------------////-------------------------///
-//--------------------------////-------------------------///
-//--------------------------////-------------------------///
-let colourSlc = document.getElementById(`colour_selector`);
-
-// colourSlc.addEventListener(`click`, () => {
-//   console.log("colour clicked");
-// });
-
-//TODO: load function so we know what paint color is what
-let paintColour = ``;
+//gets paint value
 colourSlc.addEventListener(
-  "change",
+  `change`,
   () => {
     colourSlc.select();
     paintColour = colourSlc.value;
-    console.log(`colour value:${paintColour} typeof:${typeof paintColour} `);
   },
   false
 );
+
+//rainbow toogle event
+rainbowTgl.addEventListener(`change`, () => {
+  //sets isRainbowChecked
+  if (isEraseChecked) {
+    //do not know why i need to set it to false twice, but i need it or it doesn't work
+    eraseTgl.checked = false;
+    isEraseChecked = false;
+    isRainbowChecked = rainbowTgl.checked;
+  } else {
+    isRainbowChecked = rainbowTgl.checked;
+  }
+});
+
+eraseTgl.addEventListener(`change`, () => {
+  if (isRainbowChecked) {
+    //do not know why i need to set it to false twice, but i need it or it doesn't work
+    rainbowTgl.checked = false;
+    isRainbowChecked = false;
+    isEraseChecked = eraseTgl.checked;
+  } else {
+    isEraseChecked = eraseTgl.checked;
+  }
+});
+
+document.getElementById("erase_btn").addEventListener(`click`, erase);
+
+createGrid();
+paint();
