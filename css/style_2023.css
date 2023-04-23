@@ -2,7 +2,7 @@
 
 /* done to everybody */
 
-body, #middle, #btn_group{
+body, #middle, #btn_group, #grid{
     display: flex;
     margin: 0;
 }
@@ -32,10 +32,13 @@ header{
 }
 
 #grid {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-color: yellow;
-    height: 650px;
-    width: 550px;
+    padding: 0;
+    height: 700px;
+    width: 700px;
+    flex-wrap: wrap;
+    flex: auto;
 }
 
 #btn_group {
