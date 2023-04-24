@@ -2,7 +2,11 @@
 
 /* done to everybody */
 
-body, #middle, #btn_group, #grid{
+body,
+#middle,
+#btn_group,
+#grd_slider,
+#grid {
     display: flex;
     margin: 0;
 }
@@ -11,13 +15,13 @@ body {
     background-color: aqua;
     flex-direction: column;
     /* keeps header and footer stuck to top and bottom */
-    justify-content: space-between; 
+    justify-content: space-between;
     min-height: 100vh;
 }
 
-header{
+header {
     border: 1px solid black;
-    background-color:aquamarine;
+    background-color: aquamarine;
 }
 
 #middle {
@@ -28,17 +32,29 @@ header{
 
 #grd_display {
     border: 1px solid black;
-    background-color: purple;
+    /* background-color: purple; */
 }
+
+#grd_slider{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#slider{
+    width: 80%;
+}
+
 
 #grid {
     /* border: 1px solid black; */
     background-color: yellow;
     padding: 0;
-    height: 700px;
-    width: 700px;
-    flex-wrap: wrap;
-    flex: auto;
+    height: 600px;
+    width: 550px;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
 #btn_group {

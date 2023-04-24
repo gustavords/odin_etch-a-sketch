@@ -1,0 +1,67 @@
+// //grab grid location
+// const grid = document.getElementById(`grid`);
+
+// const slider = document.getElementById(`slider`);
+// let range = slider.value;
+// let gridSize = range * range;
+// let boxWidth = grid.clientWidth / range;
+
+
+// drawGrid(gridSize);
+
+// slider.addEventListener(`input`, () => {
+//     console.log(slider.value);
+//     range = slider.value;
+
+//     deleteGrid();
+//     drawGrid(gridSize);
+// });
+
+//eventlistener for range
+// slider.oninput = () => console.log(slider.value);
+
+
+
+// let boxHeight = 700 / 16;
+
+function drawGrid(gridSize) {
+    for (let i = 0; i < gridSize; i++) {
+        const gridCell = document.createElement(`div`);
+        gridCell.style.cssText = `box-sizing: border-box; border: 1px solid black; flex:auto;`;
+        // gridCell.style.cssText = ``;
+        gridCell.style.height = `auto`;
+        gridCell.style.width = `${boxWidth}px`;
+        gridCell.style.padding = 0;
+        gridCell.style.margin = 0;
+        gridCell.style[`background-color`] = `red`;
+        gridCell.setAttribute(`class`, `cell`);
+        grid.appendChild(gridCell);
+    }
+}
+
+function deleteGrid() {
+
+    const cell = document.getElementsByClassName(`cell`);
+    console.log(cell);
+    for (let i = cell.length -1; i >= 0; i--){
+        grid.children[i].remove();
+        
+    }
+    // for (let i = 0; i < grid.children.length - 1; i++) {
+    //     grid.children[i].removeChild();
+    // }
+    // cell.remove();
+    // cell.children.removeChild();
+}
+
+
+// getSliderValue();
+// let gridSize = 16 * 16;
+//get grid size from range slider
+
+
+
+// console.log(grid.offsetHeight);
+// console.log(grid.offsetWidth);
+// console.log(grid.clientHeight);
+// console.log(grid.clientWidth);

@@ -17,10 +17,18 @@
     <div id="middle">
         <div id="grd_display">
             <div id="grd_slider">
-                <label>label for later</label>
-                <input type="range" name="" id="">
+                <input autocomplete="off" type="range" min=16 max="64" value="16" name="slider" id="slider">
+                <label id="sliderLabel">label for later</label>
             </div>
-            <div id="grid"></div>
+            <!-- <div class="slider">
+                <input type="range" min="0" max="200" value="100" oninput="rangeValue.innerText = this.value">
+                <p id="rangeValue">100</p>
+            </div> -->
+            <div class="grid_holder">
+                <!-- <div id="container"> -->
+                    <div id="grid"></div>
+                <!-- </div> -->
+            </div>
         </div>
         <div id="btn_group">
             <button class="btn">change color</button>
