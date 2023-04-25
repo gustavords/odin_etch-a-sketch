@@ -26,13 +26,29 @@
             </div> -->
             <div class="grid_holder">
                 <!-- <div id="container"> -->
-                    <div id="grid"></div>
+                <div id="grid"></div>
                 <!-- </div> -->
             </div>
         </div>
         <div id="btn_group">
-            <button class="btn">change color</button>
+            <div>
+                <label for="brush_picker" class="btn">Choose Brush Colour:
+                    <input autocomplete="off" type="color" id="brushPkr" class="btn" name="brush_picker"
+                        value="#000000">
+                </label>
+            </div>
+            <div>
+                <label for="bg_picker" class="btn">Choose BackGroundmColour:
+                    <input autocomplete="off" type="color" id="bgPkr" class="btn" name="bg_picker" value="#FFFFFF">
+                </label>
+            </div>
             <button class="btn">eraser</button>
+            <div><!-- Rounded switch -->
+                <label class="switch"> 
+                    <input autocomplete="off" class="btn" id="eraserTgl" type="checkbox">
+                    <span class="slider round"></span>
+                </label> Eraser
+            </div>
             <button class="btn">erase all</button>
         </div>
     </div>
