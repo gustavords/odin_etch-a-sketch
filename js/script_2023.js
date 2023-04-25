@@ -11,7 +11,8 @@ const eraserToggle = document.getElementById(`eraserTgl`);
 //on start up
 let chosenColour = brushPicker.value;
 let chosenBgColour = bgPicker.value;
-let eraserColour = () => {return bgPicker.value};
+const eraserColour = () => { return bgPicker.value };
+const eraserToggleChecked = () => { return eraserToggle.checked };
 sliderLbl.textContent = `${slider.value} X ${slider.value}`;
 createGrid();
 
@@ -24,9 +25,12 @@ slider.addEventListener(`input`, () => {
 });
 
 /**TODO:
- * - keep same color during grid resize? or ask.warn before resizing
+ * waring before resizing
+ *    -- maybe do a hover thing where it warns you
  */
 function createGrid() {
+    //resets eraser toggle
+    if (eraserToggleChecked() == true) eraserToggle.click();
     //creates row
     for (let i = 0; i < slider.value; i++) {
         let row = document.createElement(`div`);
@@ -45,7 +49,7 @@ function createGrid() {
             gridCell.setAttribute(`class`, `cell`);
             gridCell.style.border = `.5px solid black`
             gridCell.style.boxSizing = `border-box`;
-            gridCell.style.backgroundColor = `white`;
+            gridCell.style.backgroundColor = `${chosenBgColour}`; //colour of background
             gridCell.style.height = `auto`;
             gridCell.style.width = `${gridWidth}px`;//this will determine the division of the grids
             row.appendChild(gridCell);
@@ -61,62 +65,123 @@ function removeRows() {
     });
 }
 
+
 //paint cell events
 grid.addEventListener("mousedown", (e) => {
     colourCell(e);
     grid.addEventListener("mouseover", colourCell);
+    pauseEvent(e);
 });
 
-grid.addEventListener(`mouseup`, () => {
+grid.addEventListener(`mouseup`, (e) => {
     grid.removeEventListener("mouseover", colourCell, { once: true });
+    pauseEvent(e);
 });
 
+//stops propagations, ∴ stopping mouse drag event
+function pauseEvent(e) {
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.preventDefault) e.preventDefault();
+    e.cancelBubble = true;
+    e.returnValue = false;
+    return false;
+}
 function colourCell(e) {
     e.target.style.backgroundColor = chosenColour;
 }
 
 //eraser toggle button event
-/**TODO:
- * - fix reset for color or bg picker is changed
- * - fix reset fro when grid is resized
- */
 eraserToggle.addEventListener(`change`, () => {
     if (eraserToggle.checked == true) {
-        console.log(eraserToggle.checked);
         chosenColour = eraserColour();
     }
     if (eraserToggle.checked == false) {
-        console.log(eraserToggle.checked);
-        chosenColour = document.getElementById(`brushPkr`).value;
+        chosenColour = brushPicker.value;
     }
 });
 
 //erase background button event
-btnGroup[5].onclick = () => { eraseAll() };
+btnGroup[5].onclick = () => {
+    if (eraserToggleChecked() == true) eraserToggle.click();
+    eraseAll();
+};
 
+//erases to current background color
 function eraseAll() {
     const cells = document.getElementsByClassName(`cell`);
     let arr = [...cells];
     arr.forEach((x) => {
-        x.style.backgroundColor = `white`;
+        x.style.backgroundColor = bgPicker.value;
     });
 }
 
 //brush colour change button
 brushPicker.addEventListener("change", changeColorPicker, false);
 
+// let previousBrushColour = [];
+// previousBrushColour.push(chosenColour);
+// console.log(previousBrushColour);
+
+// previousBrushColour.push(chosenColour);
+// console.log(previousBrushColour);
+
+// if(previousBrushColour.includes(chosenBgColour)){
+//     console.log(`here`)
+// }
+
+/**
+ * TODO: figure out a way to keep the colors of brush in history to not be changed with background
+ */
 //background colour change button
 bgPicker.addEventListener("change", (e) => {
+
+    if (eraserToggleChecked() == true) eraserToggle.click();
+
     const cells = document.getElementsByClassName(`cell`);
     changeBgColorPicker(e);
-    for (let colours of cells) {
-        colours.style.backgroundColor = chosenBgColour;
+
+
+    for (let cell of cells) {
+
+        let cellColor = cell.style.backgroundColor;
+        const rgbArr = toRGBArray(cellColor)
+        let hexValOfCellBkgCol = rgbToHex(rgbArr[0], rgbArr[1], rgbArr[2]);
+
+
+        if (hexValOfCellBkgCol == chosenColour) {
+            cell.style.backgroundColor = chosenColour;
+        }
+        else {
+            cell.style.backgroundColor = chosenBgColour;
+
+        }
     }
 }, false);
+
+
+/**
+ * all of this is because theres no rgb to hex conversion in js
+ * and html outputs different color values from style.background and input buttons 
+ */
+const toRGBArray = rgbStr => rgbStr.match(/\d+/g).map(Number);
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
 function changeColorPicker(event) {
     chosenColour = event.target.value;
 }
+
 function changeBgColorPicker(event) {
     chosenBgColour = event.target.value;
+}
+
+function updateFirst(event) {
+    return event.target.value;
 }
