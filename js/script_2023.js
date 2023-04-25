@@ -1,43 +1,31 @@
-//project essential:
-//    - grid that changes cell size but not grid size, should go from 14-64
-//      - grid should be replaced time
-//    - once mouse hover over grid, color should change
-//    - extra: color changes random while hovering
-
-//pseudo code 1.0
-
-//prompt/slider:
-// instead of prompt, will use slider
-// need to get slider value
-// slider value will be the new grid size
-// grid should update every time the slider is changed (event)
-let slider = document.getElementById(`slider`);
+const slider = document.getElementById(`slider`);
 const sliderLbl = document.getElementById(`sliderLabel`)
+const grid = document.getElementById(`grid`);
+const gridHeight = grid.clientHeight / slider.value;
+const gridWidth = grid.clientWidth / slider.value;
+const btnGroup = document.getElementsByClassName(`btn`);
+const brushPicker = document.getElementById(`brushPkr`);
+const bgPicker = document.getElementById(`bgPkr`);
+const eraserToggle = document.getElementById(`eraserTgl`);
 
-//at page load
+//on start up
+let chosenColour = brushPicker.value;
+let chosenBgColour = bgPicker.value;
+let eraserColour = () => {return bgPicker.value};
 sliderLbl.textContent = `${slider.value} X ${slider.value}`;
+createGrid();
 
+
+//resize grid event
 slider.addEventListener(`input`, () => {
     removeRows();
     sliderLbl.textContent = `${slider.value} X ${slider.value}`;
     createGrid();
 });
 
-//grid creation:
-// create amount of divs according to slider-value^2
-// make the div widths the container of grid/slider-value
-// use wrap fo make divs create new rows automatically <-- does not work
-//      wrap alone does not work, will have to artificially create rows and cells
-//      rows should only have height as width will be dealt with cells
-// make the remove grid once slider-value changes
-
-let grid = document.getElementById(`grid`);
-let gridHeight = grid.clientHeight / slider.value;
-let gridWidth = grid.clientWidth / slider.value;
-
-//creates grid at page load
-createGrid();
-
+/**TODO:
+ * - keep same color during grid resize? or ask.warn before resizing
+ */
 function createGrid() {
     //creates row
     for (let i = 0; i < slider.value; i++) {
@@ -73,11 +61,7 @@ function removeRows() {
     });
 }
 
-//hover:
-// create event to check if mouse is over grid
-// change background-colour of grid cells once over
-// Hover only works when holding clicking down
-
+//paint cell events
 grid.addEventListener("mousedown", (e) => {
     colourCell(e);
     grid.addEventListener("mouseover", colourCell);
@@ -87,56 +71,29 @@ grid.addEventListener(`mouseup`, () => {
     grid.removeEventListener("mouseover", colourCell, { once: true });
 });
 
-//on start up
-let chosenColour = `#000000`;
-let chosenBgColour = `#FFFFFF`;
-let eraserColour = () => {
-    return document.getElementById(`bgPkr`).value;
-};
-
 function colourCell(e) {
     e.target.style.backgroundColor = chosenColour;
 }
 
-
-//buttons:
-// erase all: change all cell divs to white
-// erase brush: while hover, change background to white
-// colour brush: while hover, change background to chosen colour
-// random brush: same as other brushes, but add 3 random variable to rgb
-
-// const btnGroup = document.getElementsByClassName(`btn`);
-
-// btnGroup[4].onclick = () => {eraser()}; //maybe its toggle
-let eraserToggle = document.getElementById(`eraserTgl`);
-console.log(eraserToggle.checked);
-let temp = chosenColour;
+//eraser toggle button event
+/**TODO:
+ * - fix reset for color or bg picker is changed
+ * - fix reset fro when grid is resized
+ */
 eraserToggle.addEventListener(`change`, () => {
-
     if (eraserToggle.checked == true) {
         console.log(eraserToggle.checked);
         chosenColour = eraserColour();
     }
     if (eraserToggle.checked == false) {
         console.log(eraserToggle.checked);
-        chosenColour =  document.getElementById(`brushPkr`).value;
+        chosenColour = document.getElementById(`brushPkr`).value;
     }
-
-    //do something about the color picker still being activeafter grid reshaping and color changing
-
-
 });
-// x.checked;
-function eraser() {
-    chosenColour = chosenBgColour;
-}
 
-//erase toggle brush
+//erase background button event
+btnGroup[5].onclick = () => { eraseAll() };
 
-
-
-// btnGroup[5].onclick = () => {eraseAll()};
-//erase button
 function eraseAll() {
     const cells = document.getElementsByClassName(`cell`);
     let arr = [...cells];
@@ -144,10 +101,6 @@ function eraseAll() {
         x.style.backgroundColor = `white`;
     });
 }
-
-
-let brushPicker = document.getElementById(`brushPkr`);
-let bgPicker = document.getElementById(`bgPkr`);
 
 //brush colour change button
 brushPicker.addEventListener("change", changeColorPicker, false);
@@ -161,17 +114,9 @@ bgPicker.addEventListener("change", (e) => {
     }
 }, false);
 
-
 function changeColorPicker(event) {
     chosenColour = event.target.value;
 }
 function changeBgColorPicker(event) {
     chosenBgColour = event.target.value;
 }
-
-//in case cancel is hit on the picker
-// brushPicker.addEventListener("input", updateFirstPicker, false);
-// bgPicker.addEventListener("input", updateFirstPicker, false);
-// function updateFirstPicker(event) {
-//     console.log(event.target.value);
-// }
