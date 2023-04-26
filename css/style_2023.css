@@ -95,8 +95,7 @@ header>h1 {
 }
 
 #grd_slider {
-  background-color: white;
-  color: var(--white);
+  background-color:var(--white);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -110,7 +109,7 @@ header>h1 {
 
 #grid_holder {
   padding: 1em;
-  background-color: white;
+  background-color: var(--white);
 }
 
 /* no wrap no border, it messes up the grid */
@@ -138,7 +137,8 @@ header>h1 {
 }
 
 .btn,
-h1 {
+h1,
+#toggleSpace>p{
   color: var(--redblack);
   font-weight: bolder;
   text-shadow: -1px 0 gold, 0 1px gold, 1px 0 gold, 0 -1px gold;
@@ -171,6 +171,9 @@ h1 {
   height: 80px;
   border-style: groove;
 }
+.cute>label>p{
+  margin: 0;
+}
 
 .iptSty:hover {
   border-color: var(--softyellow);
@@ -200,7 +203,6 @@ h1 {
 }
 
 
-
 footer {
   border: 1px solid black;
   background-color: whitesmoke;
@@ -213,60 +215,56 @@ footer {
 
 
 
+/*All this b*llshit so the toggle actually toggles, got it from w3schools, dont understand it yet
+*/
 
-
-div#toggleSpace>label>p{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--redblack);
-  text-shadow: -2px 0 gold, 0 1px white, 1px 0 burlywood, 0 -1px burlywood;
-  font-weight: bolder;
-  font-size: x-large;
+#toggleSpace>p{
+  margin: 0;
 }
 
 
 /* The switch - the box around the slider */
-/* .switch {
+.switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 250px;
   height: 34px;
-} */
+}
 
 /* Hide default HTML checkbox */
-/* .switch input {
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
-} */
+}
 
 /* The slider */
-/* .slider {
+.slider {
   position: absolute;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--white);
   -webkit-transition: .4s;
   transition: .4s;
-} */
+}
 
-/* .slider:before {
+.slider:before {
   position: absolute;
-  content: "why ";
+  content: "E ";
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--yellow);
   -webkit-transition: .4s;
   transition: .4s;
-} */
-/* 
+  text-align: center;
+  border: 1px solid black;
+}
+
 input:checked+.slider {
   background-color: #2196F3;
 }
@@ -278,14 +276,18 @@ input:focus+.slider {
 input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
-  transform: translateX(26px);
-} */
+  transform: translateX(215px);
+}
 
 /* Rounded sliders */
-/* .slider.round {
+.slider.round {
   border-radius: 34px;
 }
 
 .slider.round:before {
   border-radius: 50%;
-} */
+}
+
+.eraserText{
+  text-align: center;
+}
