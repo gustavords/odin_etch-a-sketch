@@ -101,7 +101,7 @@ eraserToggle.addEventListener(`change`, () => {
 });
 
 //erase background button event
-btnGroup[5].onclick = () => {
+btnGroup[4].onclick = () => {
     if (eraserToggleChecked() == true) eraserToggle.click();
     eraseAll();
 };
@@ -182,6 +182,6 @@ function changeBgColorPicker(event) {
     chosenBgColour = event.target.value;
 }
 
-function updateFirst(event) {
-    return event.target.value;
-}
+// function updateFirst(event) {
+//     return event.target.value;
+// }

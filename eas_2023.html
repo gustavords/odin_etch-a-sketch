@@ -18,32 +18,39 @@
         <div id="grd_display">
             <div id="grd_slider">
                 <input autocomplete="off" type="range" min=16 max="64" value="16" name="slider" id="slider">
-                <label id="sliderLabel">label for later</label>
+                <label id="sliderLabel">slider value</label>
             </div>
-            <div class="grid_holder">
+            <div id="grid_holder">
                 <div id="grid" draggable="false"></div>
             </div>
         </div>
         <div id="btn_group">
-            <div>
-                <label for="brush_picker" class="btn">Choose Brush Colour:
-                    <input autocomplete="off" type="color" id="brushPkr" class="btn" name="brush_picker"
+            <div class="btn cute">
+                <label for="brush_picker">
+                    <p>Brush Colour:</p>
+                    <input autocomplete="off" type="color" id="brushPkr" class="btn iptSty" name="brush_picker"
                         value="#000000">
                 </label>
             </div>
-            <div>
-                <label for="bg_picker" class="btn">Choose BackGroundColour:
-                    <input autocomplete="off" type="color" id="bgPkr" class="btn" name="bg_picker" value="#FFFFFF">
+            <div class="btn cute">
+                <label for="bg_picker">
+                    <p>Background Colour:</p>
+                    <input autocomplete="off" type="color" id="bgPkr" class="btn iptSty" name="bg_picker"
+                        value="#FFFFFF">
                 </label>
             </div>
-
-            <div><!-- Rounded switch -->
-                <label class="switch">
-                    <input autocomplete="off" class="btn" id="eraserTgl" type="checkbox">
+            <div><!-- Rounded switch can't style it properly-->
+                <label>
+                    <p style="color: white;">Eraser</p>
+                </label>
+                <label class="switch" class="btn btnSty">
+                    <input autocomplete="off" id="eraserTgl" type="checkbox">
                     <span class="slider round"></span>
-                </label> Eraser
+                </label>
             </div>
-            <button class="btn">erase all</button>
+            <button class="btn btnSty">Erase All</button>
+            <button class="btn btnSty">Reset</button>
+
         </div>
     </div>
     <footer>
