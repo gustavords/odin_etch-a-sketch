@@ -30,3 +30,10 @@
 // erase brush: while hover, change background to white
 // colour brush: while hover, change background to chosen colour
 // random brush: same as other brushes, but add 3 random variable to rgb
+
+
+
+//styling 1.1
+//input buttons are a mess
+//css can only be organized if html classes & ids is organized
+

@@ -180,6 +180,8 @@ h1,
   box-sizing: border-box;
   border-width: 10px;
   padding: 0px;
+  cursor: pointer;
+
 
 }
 
@@ -200,6 +202,7 @@ h1,
   border-color: var(--redblack);
   box-sizing: border-box;
   border: 5px groove white;
+  cursor: pointer;
 }
 
 
@@ -249,6 +252,11 @@ footer {
   background-color: var(--white);
   -webkit-transition: .4s;
   transition: .4s;
+  box-sizing: border-box;
+}
+
+.slider:hover{
+  border: .5px solid black;
 }
 
 .slider:before {
@@ -286,8 +294,4 @@ input:checked+.slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}
-
-.eraserText{
-  text-align: center;
 }
